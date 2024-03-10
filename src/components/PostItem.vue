@@ -2,6 +2,7 @@
   <div>
     <div>{{ post.title }}</div>
     <div>{{ post.content }}</div>
+    <ButtonStandart>Delete</ButtonStandart>
   </div>
 </template>
 

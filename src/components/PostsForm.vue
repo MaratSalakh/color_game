@@ -3,7 +3,7 @@
     <input v-model="post.title" type="text" placeholder="title" />
     <input v-model="post.content" type="text" placeholder="content" />
 
-    <button @click="createPost">Создать</button>
+    <ButtonStandart @click="createPost">Create</ButtonStandart>
   </form>
 </template>
 
@@ -31,3 +31,4 @@ export default {
 </script>
 
 <style></style>
+./UI/ButtonStandart.vue
