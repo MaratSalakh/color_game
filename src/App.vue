@@ -2,11 +2,11 @@
   <button @click="addLike">like</button>
   <button @click="addDislike">dislike</button>
 
-  <PostsForm></PostsForm>
-  <PostsList :posts="posts"></PostsList>
-
   <div>{{ likes }}</div>
   <div>{{ dislikes }}</div>
+
+  <PostsForm @create="createPost"></PostsForm>
+  <PostsList :posts="posts"></PostsList>
 </template>
 
 <script>
@@ -27,8 +27,6 @@ export default {
         { id: 2, title: "post2", content: 2 },
         { id: 3, title: "post3", content: 3 },
       ],
-      title: "",
-      content: "",
     };
   },
   methods: {
@@ -38,14 +36,8 @@ export default {
     addDislike() {
       this.dislikes += 1;
     },
-    createPost() {
-      this.posts.push({
-        id: Date.now(),
-        title: this.title,
-        content: this.content,
-      });
-      this.title = "";
-      this.content = "";
+    createPost(post) {
+      this.posts.push(post);
     },
   },
 };

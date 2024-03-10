@@ -3,7 +3,7 @@
     <input v-model="post.title" type="text" placeholder="title" />
     <input v-model="post.content" type="text" placeholder="content" />
 
-    <button>Создать</button>
+    <button @click="createPost">Создать</button>
   </form>
 </template>
 
@@ -16,6 +16,16 @@ export default {
         content: "",
       },
     };
+  },
+  methods: {
+    createPost() {
+      this.post.id = Date.now();
+      this.$emit("create", this.post);
+      this.post = {
+        title: "",
+        content: "",
+      };
+    },
   },
 };
 </script>
