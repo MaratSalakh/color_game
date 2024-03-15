@@ -1,12 +1,14 @@
 <template>
-  <div>
-    <h3>List of users</h3>
+  <h3>List of users</h3>
+  <div v-if="posts.length > 0">
     <PostItem
       v-for="post in posts"
       :post="post"
       :key="post.id"
-      @remove="$emit('remove', post)"></PostItem>
+      @remove="$emit('remove', post)"
+    ></PostItem>
   </div>
+  <h3 v-else>List is empty</h3>
 </template>
 
 <script>

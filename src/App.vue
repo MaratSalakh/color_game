@@ -6,7 +6,7 @@
   <div>{{ dislikes }}</div>
 
   <PostsForm @create="createPost"></PostsForm>
-  <PostsList :posts="posts"></PostsList>
+  <PostsList :posts="posts" @remove="removePost"></PostsList>
 </template>
 
 <script>
@@ -39,6 +39,9 @@ export default {
     createPost(post) {
       this.posts.push(post);
     },
+    removePost(post) {
+      this.posts = this.posts.filter((currentPost) => currentPost.id !== post.id);
+    }
   },
 };
 </script>
