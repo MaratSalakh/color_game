@@ -10,10 +10,16 @@
     <PostsForm @create="createPost"></PostsForm>
   </MyDialog>
 
-  <PostsList :posts="posts" @remove="removePost"></PostsList>
+  <PostsList
+    :posts="posts"
+    @remove="removePost"
+    v-if="!isLoadingData"
+  ></PostsList>
+  <h3 v-else>Loading...</h3>
 </template>
 
 <script>
+import axios from "axios";
 import PostsForm from "./components/PostsForm.vue";
 import PostsList from "@/components/PostsList.vue";
 
@@ -26,13 +32,9 @@ export default {
     return {
       likes: 0,
       dislikes: 0,
-
-      posts: [
-        { id: 1, title: "post1", content: 1 },
-        { id: 2, title: "post2", content: 2 },
-        { id: 3, title: "post3", content: 3 },
-      ],
+      posts: [],
       dialogVisible: false,
+      isLoadingData: false,
     };
   },
   methods: {
@@ -54,6 +56,22 @@ export default {
     showDialog() {
       this.dialogVisible = true;
     },
+    async fetchPosts() {
+      try {
+        this.isLoadingData = true;
+        const response = await axios.get(
+          "https://jsonplaceholder.typicode.com/posts?_limit=10"
+        );
+        this.posts = response.data;
+      } catch (e) {
+        alert("Error!");
+      } finally {
+        this.isLoadingData = false;
+      }
+    },
+  },
+  mounted() {
+    this.fetchPosts();
   },
 };
 </script>

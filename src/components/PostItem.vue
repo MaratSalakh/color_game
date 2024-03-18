@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div>{{ post.title }}</div>
-    <div>{{ post.content }}</div>
+    <div>Title: {{ post.title }}</div>
+    <div>Content: {{ post.body }}</div>
     <ButtonStandart @click="$emit('remove', post)">Delete</ButtonStandart>
   </div>
 </template>

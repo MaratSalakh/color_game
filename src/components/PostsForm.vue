@@ -3,7 +3,7 @@
     <h4>Creating post</h4>
 
     <InputStandart v-model="post.title" type="text" placeholder="title" />
-    <InputStandart v-model="post.content" type="text" placeholder="content" />
+    <InputStandart v-model="post.body" type="text" placeholder="content" />
 
     <ButtonStandart @click="createPost">Create</ButtonStandart>
   </form>
@@ -15,7 +15,7 @@ export default {
     return {
       post: {
         title: "",
-        content: "",
+        body: "",
       },
     };
   },
