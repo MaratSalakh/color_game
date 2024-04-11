@@ -5,6 +5,8 @@
   <div>{{ likes }}</div>
   <div>{{ dislikes }}</div>
 
+  <InputStandart placeholder="Search..." v-model="searchQuery"></InputStandart>
+
   <div>
     <Button @click="showDialog">Create Post</Button>
     <SelectStandart
@@ -18,7 +20,7 @@
   </MyDialog>
 
   <PostsList
-    :posts="sortedPosts"
+    :posts="sortedAndSearchedPosts"
     @remove="removePost"
     v-if="!isLoadingData"
   ></PostsList>
@@ -43,6 +45,7 @@ export default {
       dialogVisible: false,
       isLoadingData: false,
       selectedSort: "",
+      searchQuery: "",
       sortOptions: [
         { value: "title", name: "Name sort" },
         { value: "body", name: "Description sort" },
@@ -87,11 +90,14 @@ export default {
   },
   computed: {
     sortedPosts() {
-      return [...this.posts].sort((post1, post2) => {
-        return post1[this.selectedSort]?.localeCompare(
-          post2[this.selectedSort]
-        );
-      });
+      return [...this.posts].sort((post1, post2) =>
+        post1[this.selectedSort]?.localeCompare(post2[this.selectedSort])
+      );
+    },
+    sortedAndSearchedPosts() {
+      return this.sortedPosts.filter((post) =>
+        post.title.toLowerCase().includes(this.searchQuery)
+      );
     },
   },
   watch: {},
