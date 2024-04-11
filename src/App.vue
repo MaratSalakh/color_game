@@ -5,13 +5,20 @@
   <div>{{ likes }}</div>
   <div>{{ dislikes }}</div>
 
-  <Button @click="showDialog">Visible</Button>
+  <div>
+    <Button @click="showDialog">Create Post</Button>
+    <SelectStandart
+      v-model="selectedSort"
+      :options="sortOptions"
+    ></SelectStandart>
+  </div>
+
   <MyDialog v-model:show="dialogVisible">
     <PostsForm @create="createPost"></PostsForm>
   </MyDialog>
 
   <PostsList
-    :posts="posts"
+    :posts="sortedPosts"
     @remove="removePost"
     v-if="!isLoadingData"
   ></PostsList>
@@ -35,6 +42,11 @@ export default {
       posts: [],
       dialogVisible: false,
       isLoadingData: false,
+      selectedSort: "",
+      sortOptions: [
+        { value: "title", name: "Name sort" },
+        { value: "body", name: "Description sort" },
+      ],
     };
   },
   methods: {
@@ -73,6 +85,16 @@ export default {
   mounted() {
     this.fetchPosts();
   },
+  computed: {
+    sortedPosts() {
+      return [...this.posts].sort((post1, post2) => {
+        return post1[this.selectedSort]?.localeCompare(
+          post2[this.selectedSort]
+        );
+      });
+    },
+  },
+  watch: {},
 };
 </script>
 
