@@ -1,5 +1,12 @@
 <template>
-  <input :value="modelValue" @input="updateInput" type="text" />
+  <input
+    :value="modelValue"
+    @input="updateInput"
+    type="text"
+    class="form-control"
+    placeholder="Search"
+    aria-label="Search"
+  />
 </template>
 
 <script>
