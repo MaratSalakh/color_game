@@ -1,5 +1,5 @@
 <template>
-  <h3>List of users</h3>
+  <h3 class="mt-">List of users</h3>
   <div v-if="posts.length > 0">
     <PostItem
       v-for="post in posts"
