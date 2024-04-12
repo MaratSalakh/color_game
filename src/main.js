@@ -3,10 +3,15 @@ import App from "./App.vue";
 
 import components from "./components/UI/index";
 
+import router from "@/router/router";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap";
+
 const app = createApp(App);
 
 components.forEach((component) => {
   app.component(component.name, component);
 });
 
-app.mount("#app");
+app.use(router).mount("#app");
