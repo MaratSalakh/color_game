@@ -7,7 +7,7 @@
 </template>
 <script>
 export default {
-  name: "MyDialog",
+  name: "DialogStandart",
   props: {
     show: {
       type: Boolean,

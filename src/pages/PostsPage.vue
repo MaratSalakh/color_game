@@ -2,16 +2,13 @@
   <InputStandart placeholder="Search..." v-model="searchQuery"></InputStandart>
 
   <div>
-    <ButtonStandart @click="showDialog">Create post</ButtonStandart>
     <SelectStandart
       v-model="selectedSort"
       :options="sortOptions"
     ></SelectStandart>
   </div>
 
-  <MyDialog v-model:show="dialogVisible">
-    <PostsForm @create="createPost"></PostsForm>
-  </MyDialog>
+  <PostsForm @create="createPost"></PostsForm>
 
   <PostsList
     :posts="sortedAndSearchedPosts"
@@ -35,7 +32,6 @@ export default {
   data() {
     return {
       posts: [],
-      dialogVisible: false,
       isLoadingData: false,
       selectedSort: "",
       searchQuery: "",
@@ -56,9 +52,6 @@ export default {
       this.posts = this.posts.filter(
         (currentPost) => currentPost.id !== post.id
       );
-    },
-    showDialog() {
-      this.dialogVisible = true;
     },
     async fetchPosts() {
       try {
