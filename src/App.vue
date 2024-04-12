@@ -25,6 +25,7 @@
     v-if="!isLoadingData"
   ></PostsList>
   <h3 v-else>Loading...</h3>
+  <div ref="observer" class="observer"></div>
 </template>
 
 <script>
@@ -46,6 +47,8 @@ export default {
       isLoadingData: false,
       selectedSort: "",
       searchQuery: "",
+      page: 1,
+      limit: 10,
       sortOptions: [
         { value: "title", name: "Name sort" },
         { value: "body", name: "Description sort" },
@@ -75,7 +78,16 @@ export default {
       try {
         this.isLoadingData = true;
         const response = await axios.get(
-          "https://jsonplaceholder.typicode.com/posts?_limit=10"
+          "https://jsonplaceholder.typicode.com/posts",
+          {
+            params: {
+              _page: this.page,
+              _limit: this.limit,
+            },
+          }
+        );
+        this.totalPages = Math.ceil(
+          response.headers["x-total-count"] / this.limit
         );
         this.posts = response.data;
       } catch (e) {
@@ -84,9 +96,40 @@ export default {
         this.isLoadingData = false;
       }
     },
+    async loadMorePosts() {
+      try {
+        this.page += 1;
+        const response = await axios.get(
+          "https://jsonplaceholder.typicode.com/posts",
+          {
+            params: {
+              _page: this.page,
+              _limit: this.limit,
+            },
+          }
+        );
+        this.totalPages = Math.ceil(
+          response.headers["x-total-count"] / this.limit
+        );
+        this.posts = [...this.posts, ...response.data];
+      } catch (e) {
+        alert("Error!");
+      }
+    },
   },
   mounted() {
     this.fetchPosts();
+    const options = {
+      rootMargin: "0px",
+      treshhold: 1.0,
+    };
+    const callback = (entries) => {
+      if (entries[0].isIntersecting && this.page < this.totalPages) {
+        this.loadMorePosts();
+      }
+    };
+    const observer = new IntersectionObserver(callback, options);
+    observer.observe(this.$refs.observer);
   },
   computed: {
     sortedPosts() {
@@ -104,4 +147,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.observer {
+  height: 30px;
+  width: 30px;
+}
+</style>
