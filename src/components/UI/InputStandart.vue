@@ -5,7 +5,8 @@
     type="text"
     class="form-control"
     placeholder="Search"
-    aria-label="Search"
+    aria-label="Search post"
+    aria-describedby="Search post"
   />
 </template>
 
