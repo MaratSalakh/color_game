@@ -1,6 +1,6 @@
 <template>
-  <button @click="addLike">like</button>
-  <button @click="addDislike">dislike</button>
+  <ButtonStandart @click="addLike">like</ButtonStandart>
+  <ButtonStandart @click="addDislike">dislike</ButtonStandart>
 
   <div>{{ likes }}</div>
   <div>{{ dislikes }}</div>
@@ -8,7 +8,7 @@
   <InputStandart placeholder="Search..." v-model="searchQuery"></InputStandart>
 
   <div>
-    <Button @click="showDialog">Create Post</Button>
+    <ButtonStandart @click="showDialog">Create post</ButtonStandart>
     <SelectStandart
       v-model="selectedSort"
       :options="sortOptions"
