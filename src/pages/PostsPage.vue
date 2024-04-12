@@ -1,22 +1,30 @@
 <template>
-  <InputStandart placeholder="Search..." v-model="searchQuery"></InputStandart>
+  <div class="container">
+    <div class="row row-cols-4 my-2">
+      <div>
+        <InputStandart
+          placeholder="Search..."
+          v-model="searchQuery"
+        ></InputStandart>
+      </div>
+      <div>
+        <SelectStandart
+          v-model="selectedSort"
+          :options="sortOptions"
+        ></SelectStandart>
+      </div>
+    </div>
 
-  <div>
-    <SelectStandart
-      v-model="selectedSort"
-      :options="sortOptions"
-    ></SelectStandart>
+    <PostsForm @create="createPost"></PostsForm>
+
+    <PostsList
+      :posts="sortedAndSearchedPosts"
+      @remove="removePost"
+      v-if="!isLoadingData"
+    ></PostsList>
+    <h3 v-else>Loading...</h3>
+    <div ref="observer" class="observer"></div>
   </div>
-
-  <PostsForm @create="createPost"></PostsForm>
-
-  <PostsList
-    :posts="sortedAndSearchedPosts"
-    @remove="removePost"
-    v-if="!isLoadingData"
-  ></PostsList>
-  <h3 v-else>Loading...</h3>
-  <div ref="observer" class="observer"></div>
 </template>
 
 <script>
