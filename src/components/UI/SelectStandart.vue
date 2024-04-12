@@ -1,11 +1,17 @@
 <template>
-  <select :value="modelValue" @change="changeOption">
-    <option disabled value="">Select from list</option>
+  <select
+    :value="modelValue"
+    @change="changeOption"
+    class="form-select"
+    aria-label="Select sorting"
+  >
+    <option selected value="">Select from list</option>
     <option v-for="option in options" :key="option.value" :value="option.value">
       {{ option.name }}
     </option>
   </select>
 </template>
+
 <script>
 export default {
   name: "SelectStandart",
@@ -25,4 +31,5 @@ export default {
   },
 };
 </script>
+
 <style></style>
