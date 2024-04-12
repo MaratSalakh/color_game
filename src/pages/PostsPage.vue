@@ -1,10 +1,4 @@
 <template>
-  <ButtonStandart @click="addLike">like</ButtonStandart>
-  <ButtonStandart @click="addDislike">dislike</ButtonStandart>
-
-  <div>{{ likes }}</div>
-  <div>{{ dislikes }}</div>
-
   <InputStandart placeholder="Search..." v-model="searchQuery"></InputStandart>
 
   <div>
@@ -40,8 +34,6 @@ export default {
   },
   data() {
     return {
-      likes: 0,
-      dislikes: 0,
       posts: [],
       dialogVisible: false,
       isLoadingData: false,
@@ -56,12 +48,6 @@ export default {
     };
   },
   methods: {
-    addLike() {
-      this.likes += 1;
-    },
-    addDislike() {
-      this.dislikes += 1;
-    },
     createPost(post) {
       this.posts.push(post);
       this.dialogVisible = false;
