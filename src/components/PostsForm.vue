@@ -29,7 +29,12 @@
           ></button>
         </div>
         <div class="modal-body">
-          <InputStandart v-model="post.title" type="text" placeholder="title" />
+          <InputStandart
+            v-model="post.title"
+            type="text"
+            placeholder="title"
+            class="mb-2"
+          />
           <InputStandart
             v-model="post.body"
             type="text"

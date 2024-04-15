@@ -20,13 +20,26 @@
         <PostsForm @create="createPost"></PostsForm>
       </div>
 
-      <PostsList
-        :posts="sortedAndSearchedPosts"
-        @remove="removePost"
-        v-if="!isLoadingData"
-      ></PostsList>
-      <h3 v-else>Loading...</h3>
-      <div ref="observer" class="observer"></div>
+      <div>
+        <PostsList
+          :posts="sortedAndSearchedPosts"
+          @remove="removePost"
+          v-if="!isLoadingData"
+        ></PostsList>
+        <div v-else class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <div ref="observer" class="d-flex justify-content-center">
+          <div
+            class="spinner-grow text-primary"
+            role="status"
+            v-if="posts.length < 100 && searchQuery === ''"
+          >
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <div class="observer" v-else></div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
