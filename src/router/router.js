@@ -8,7 +8,7 @@ const routes = [
     component: MainPage,
   },
   {
-    path: "/posts",
+    path: "/shop",
     component: PostsPage,
   },
 ];
