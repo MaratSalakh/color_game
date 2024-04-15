@@ -1,4 +1,5 @@
 <template>
+  <NavBar currentPage="shop"></NavBar>
   <div class="container">
     <div class="row my-2 gy-2">
       <div class="row row-cols-4">
@@ -48,11 +49,13 @@
 import axios from "axios";
 import PostsForm from "@/components/PostsForm.vue";
 import PostsList from "@/components/PostsList.vue";
+import NavBar from "@/components/NavBar.vue";
 
 export default {
   components: {
     PostsList,
     PostsForm,
+    NavBar,
   },
   data() {
     return {
