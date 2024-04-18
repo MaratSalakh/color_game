@@ -33,18 +33,38 @@
             </button>
           </li>
         </ul>
+        <div>
+          <InputStandart
+            placeholder="Search"
+            :modelValue="searchQuery"
+            @update:modelValue="setSearchQuery"
+          ></InputStandart>
+        </div>
       </div>
     </div>
   </nav>
 </template>
 
 <script>
+import { mapMutations, mapState } from "vuex";
+
 export default {
   props: {
     currentPage: {
       type: String,
       required: true,
     },
+  },
+  methods: {
+    ...mapMutations({
+      setSearchQuery: "main/setSearchQuery",
+    }),
+  },
+  computed: {
+    ...mapState({
+      searchQuery: (state) => state.main.searchQuery,
+    }),
+    ...mapMutations({}),
   },
 };
 </script>
