@@ -6,7 +6,10 @@ export const MainPageModule = {
     selectedSort: "",
     searchQuery: "",
     products: [],
-    sortOptions: [{ value: "name", name: "Name sort" }],
+    sortOptions: [
+      { value: "name", name: "Name sort" },
+      { value: "description", name: "Description sort" },
+    ],
   }),
   getters: {
     sortedProducts(state) {
