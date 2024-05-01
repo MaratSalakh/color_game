@@ -2,9 +2,11 @@
   <div class="card" style="width: 15rem; height: 15rem">
     <div class="card-body">
       <h5 class="card-title">{{ product.name }}</h5>
-      <p class="card-text">
-        {{ product.description }}
-      </p>
+      <label for="customRange1" class="form-label">Select speed</label>
+      <input type="range" class="form-range" id="animationSpeed" />
+      <div class="d-flex justify-content-center align-items-center h-50">
+        <div class="animation"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -40,7 +42,5 @@ export default {
   height: 50px;
   background-color: red;
   border-radius: 100%;
-  border-style: solid;
-  border-color: violet;
 }
 </style>
